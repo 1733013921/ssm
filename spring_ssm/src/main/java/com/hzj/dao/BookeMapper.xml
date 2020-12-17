@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzj.dao.BookeMapper">
+    <!--    //增-->
+    <insert id="addBooke" parameterType="Bookes">
+        insert into bookes(bookName,bookCounts,datail)
+        values(#{bookName},#{bookCounts},#{datail})
+    </insert>
+    <!--    //删-->
+    <delete id="deleteBooke" parameterType="Integer">
+        delete from bookes where bookId=#{id}
+    </delete>
+    <!--    //改-->
+    <update id="alterBooke" parameterType="Bookes">
+    update bookes
+    <set>
+        <if test="bookName!=null and bookName!=''">bookName=#{bookName}</if>
+        <if test="bookCounts!=null and bookCounts!=''">bookCounts=#{bookCounts}</if>
+        <if test="datail!=null and datail!=''">datail=#{datail}</if>
+        where bookId=#{bookId}
+    </set>
+    </update>
+    <!--    //查询所有-->
+    <select id="showBooke" resultType="Bookes">
+    select *from bookes
+    </select>
+    <!--    //按id查询-->
+    <select id="findBooke" parameterType="Integer" resultType="Bookes">
+    select *from bookes where bookId=#{id}
+    </select>
+</mapper>
